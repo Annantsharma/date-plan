@@ -103,20 +103,33 @@ Will you come on a date with me? 💌
 const noBtn = document.getElementById("noBtn");
 const yesBtn = document.getElementById("yesBtn");
 
+// keep initial position near button area
+noBtn.style.position = "relative";
+
 function moveButton() {
-    const x = Math.random() * (window.innerWidth - 100);
-    const y = Math.random() * (window.innerHeight - 100);
-    noBtn.style.left = x + "px";
-    noBtn.style.top = y + "px";
+    const moveRange = 80; // 👈 control how far it moves (reduce/increase)
+
+    const x = (Math.random() - 0.5) * moveRange;
+    const y = (Math.random() - 0.5) * moveRange;
+
+    noBtn.style.transform = `translate(${x}px, ${y}px)`;
 }
 
+// Desktop hover
 noBtn.addEventListener("mouseover", moveButton);
+
+// Mobile touch support
+noBtn.addEventListener("touchstart", moveButton);
+
+// Click fallback
 noBtn.addEventListener("click", moveButton);
 
+// YES button modal (Bootstrap 5)
 yesBtn.addEventListener("click", () => {
     let modal = new bootstrap.Modal(document.getElementById('loveModal'));
     modal.show();
 });
 </script>
+
 
 </body>
